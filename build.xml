@@ -6,7 +6,7 @@
   <property name="src" location="src"/>
   <property name="build" location="build"/>
   <property name="dist" location="dist"/>
-  <property name="test.src.dir" value="test" />
+  <property name="test.src.dir" value="tests" />
   
   <target name="deps"
           description="install lots of stuff here">
@@ -47,7 +47,6 @@
         description="compile">
     <echo message="Running test" />
     <junit printsummary="yes" haltonfailure="no">
-      <classpath refid="test.path" />
       <classpath location="${test.classes.dir}" />
       <formatter type="brief" usefile="false" />
       <batchtest>
