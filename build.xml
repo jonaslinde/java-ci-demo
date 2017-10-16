@@ -7,6 +7,15 @@
   <property name="build" location="build"/>
   <property name="dist" location="dist"/>
 
+  <target name="deps"
+          description="install lots of stuff here">
+    <!-- Create the time stamp -->
+    <tstamp/>
+    <!-- Create the build directory structure used by compile -->
+    <mkdir dir="${build}"/>
+  </target>
+
+  
   <target name="init">
     <!-- Create the time stamp -->
     <tstamp/>
