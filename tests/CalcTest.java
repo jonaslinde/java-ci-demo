@@ -1,12 +1,10 @@
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.Test;
+import static org.junit.Assert.assertTrue;
 
-import org.junit.jupiter.api.Test;
-
-class FirstJUnit5Tests {
+public class TestTest {
 
     @Test
-    void myFirstTest() {
-        assertEquals(2, 1 + 1);
+    public void testTest() {
+	assertTrue(1 == 1);
     }
-
 }
