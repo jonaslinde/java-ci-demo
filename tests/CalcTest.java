@@ -10,7 +10,7 @@ public class CalcTest {
 
     @Test
     public void test2Test() {
-	assertTrue(1 == 1 + 1);
+	assertTrue(2 == 1 + 1);
     }
 
     @Test
