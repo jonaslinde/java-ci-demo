@@ -47,7 +47,7 @@
         description="compile">
     <echo message="Running test" />
     <junit printsummary="yes" haltonfailure="no">
-      <classpath location="${test.classes.dir}" />
+      <classpath location="${test.src.dir}" />
       <formatter type="brief" usefile="false" />
       <batchtest>
         <fileset dir="${test.src.dir}" includes="**/*Test*.java" />
