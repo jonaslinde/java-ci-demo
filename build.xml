@@ -5,20 +5,16 @@
   <!-- set global properties for this build -->
   <property name="src" location="src"/>
   <property name="build" location="build"/>
-  <property name="dist" location="dist"/>
-  <property name="test.src.dir" value="tests" />
-  <property name="main.build.dir" value="build/main" />  
-  <property name="main.src.dir" value="src" />
-  <property name="test.build.dir" value="build/test" />
-  <property name="test.src.dir" value="test" />
-
-  <path id="classpath.base" />
-
+  <property name="dist"  location="dist"/>
+  <property name="test"  location="test"/>
+  <property name="junit" location="lib/junit.jar"/>
+  
   <path id="classpath.test">
-    <pathelement location="lib/junit.jar" />
-    <pathelement location="${main.build.dir}"/>
-    <path refid="classpath.base" />
-  </path>  
+    <pathelement location="${junit}" />
+    <pathelement location="${test}" />
+    <pathelement location="${build}/main"/>
+    <pathelement location="${build}/test"/>
+  </path>
   
   <target name="deps"
           description="install lots of stuff here">
@@ -27,9 +23,10 @@
     <tstamp/>
     <!-- Create the build directory structure used by compile -->
     <mkdir dir="${build}"/>
+    <mkdir dir="${build}/test"/>
+    <mkdir dir="${build}/main"/>
   </target>
 
-  
   <target name="init">
     <echo message="Running init" />
     <!-- Create the time stamp -->
@@ -38,15 +35,16 @@
     <mkdir dir="${build}"/>
   </target>
 
-  <target name="compile" depends="init"
-        description="compile the source">
-    <echo message="Running compile" />
-    <!-- Compile the java code from ${src} into ${build} -->
-    <!-- javac srcdir="${src}" destdir="${build}"/ -->
+  <target name="compile" depends="init" description="compile">
+    <javac srcdir="${src}" destdir="${build}/main"/>
+    <javac srcdir="${test}" destdir="${build}/test">
+      <classpath>
+        <pathelement location="${junit}"/>
+      </classpath>
+    </javac>
   </target>
-
-  <target name="dist" depends="compile"
-        description="generate the distribution">
+  
+  <target name="dist" depends="compile" description="generate the distribution">
     <echo message="Running dist" />
     <!-- Create the distribution directory -->
     <mkdir dir="${dist}/lib"/>
@@ -55,15 +53,11 @@
     <!-- jar jarfile="${dist}/lib/MyProject-${DSTAMP}.jar" basedir="${build}"/ -->
   </target>
 
-  <target name="test"
-        description="compile">
+  <target name="test" depends="compile" description="test">
     <echo message="Running test" />
     <junit printsummary="yes" haltonfailure="no">
+      <classpath refid="classpath.test" />
       <formatter type="brief" usefile="false" />
-      <classpath>
-        <path refid="classpath.test" />
-        <pathelement location="${test.build.dir}"/>
-      </classpath>
       <batchtest>
         <fileset dir="${test.src.dir}" includes="**/*Test*.java" />
       </batchtest>
