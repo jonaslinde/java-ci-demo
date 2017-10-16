@@ -1,7 +1,7 @@
 import org.junit.Test;
 import static org.junit.Assert.assertTrue;
 
-public class TestTest {
+public class CalcTest {
 
     @Test
     public void testTest() {
