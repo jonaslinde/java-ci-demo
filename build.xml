@@ -55,7 +55,7 @@
 
   <target name="test" depends="compile" description="test">
     <echo message="Running test" />
-    <junit printsummary="yes" haltonfailure="no">
+    <junit haltonfailure="no">
       <classpath refid="classpath.test" />
       <formatter type="brief" usefile="false" />
       <batchtest>
